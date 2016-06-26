@@ -23,11 +23,11 @@ static char shareKitSinaToken;
                  description:(NSString *)description
                    mediaType:(ShareKitMediaType)mediaType
 {
-    WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
-    authRequest.redirectURI = ShareKitSinaRedirectURI;
-    authRequest.scope = @"all";
-    [WeiboSDK sendRequest:authRequest];
-    return;
+//    WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
+//    authRequest.redirectURI = ShareKitSinaRedirectURI;
+//    authRequest.scope = @"all";
+//    [WeiboSDK sendRequest:authRequest];
+//    return;
     
     WBMessageObject *message = [WBMessageObject message];
     
@@ -60,8 +60,8 @@ static char shareKitSinaToken;
             break;
     }
     if (message) {
-        WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:[self sinaWbToken]];
-//        WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message];
+//        WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:[self sinaWbToken]];
+        WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message];
         [WeiboSDK sendRequest:request];
     }
 }
@@ -86,7 +86,13 @@ static char shareKitSinaToken;
 {
     if ([response isKindOfClass:[WBSendMessageToWeiboResponse class]]) {
         WBSendMessageToWeiboResponse* sendMessageToWeiboResponse = (WBSendMessageToWeiboResponse*)response;
-        int a = 0;
+        if (sendMessageToWeiboResponse.statusCode == WeiboSDKResponseStatusCodeSuccess) {
+            [self notifyDelegateShareSuccess];
+        } else {
+            NSString *errorStr = @"未知错误";
+            NSError *error = [NSError errorWithDomain:errorStr code:sendMessageToWeiboResponse.statusCode userInfo:nil];
+            [self notifyDelegateShareFailWithError:error];
+        }
     }
 }
 
