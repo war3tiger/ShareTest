@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ShareTest/ShareKit/ShareKit+Sina.m"
-            timestampString = "488451630.034641"
+            filePath = "ShareTest/ShareKit/ShareKit+Tencent.m"
+            timestampString = "488701362.935865"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "-didReceiveWeiboResponse:"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "-onReq:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ShareTest/ShareKit/ShareKit+Sina.m"
-            timestampString = "488451630.034641"
+            filePath = "ShareTest/ShareKit/ShareKit+Tencent.m"
+            timestampString = "488701362.935865"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "-didReceiveWeiboRequest:"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-onResp:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

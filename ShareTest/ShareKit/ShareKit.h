@@ -5,20 +5,9 @@
 //  Created by zyh on 16/6/22.
 //  Copyright © 2016年 SOHU. All rights reserved.
 //
+#import "ShareKitConstant.h"
+
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(int, ShareKitType) {
-    ShareKitType_WxSession,
-    ShareKitType_WxTimeline,
-    ShareKitType_SinaWb,
-    ShareKitType_QQ
-};
-
-typedef NS_ENUM(int, ShareKitMediaType) {
-    ShareKitMediaType_Text,
-    ShareKitMediaType_Image,
-    ShareKitMediaType_Url
-};
 
 @protocol ShareKitDelegate;
 @interface ShareKit : NSObject

@@ -5,11 +5,9 @@
 //  Created by zyh on 16/6/22.
 //  Copyright © 2016年 SOHU. All rights reserved.
 //
-#import "WXApi.h"
-#import "ShareKit+WeChat.h"
-
-#import "WeiboSDK.h"
-#import "ShareKit+Sina.h"
+#import "ShareKitWx.h"
+#import "ShareKitSina.h"
+#import "ShareKitQQ.h"
 
 #import "ShareKit+Internal.h"
 #import "ShareKit.h"
@@ -35,12 +33,9 @@
 
 - (void)setupShareKit
 {
-    [WXApi registerApp:ShareKitWXAppId];
-    
-#if DEBUG
-    [WeiboSDK enableDebugMode:YES];
-#endif
-    [WeiboSDK registerApp:ShareKitSinaAppKey];
+    [[ShareKitWx sharedInstance] setupWithAppId:ShareKitWXAppId];
+    [[ShareKitSina sharedInstance] setupWithAppKey:ShareKitSinaAppKey];
+    [[ShareKitQQ sharedInstance] setupWithAppId:ShareKitQQAppId];
 }
 
 - (void)shareWithContent:(NSString *)content
@@ -55,18 +50,22 @@
 {
     _resultDelegate = delegate;
     if (type == ShareKitType_WxSession || type == ShareKitType_WxTimeline) {
-        [self wxShareWithContent:content image:imageData thumbImage:thumbImage title:title url:urlStr type:type description:description mediaType:mediaType];
+        [[ShareKitWx sharedInstance] shareWithContent:content image:imageData thumbImage:thumbImage title:title url:urlStr type:type description:description mediaType:mediaType];
     } else if (type == ShareKitType_SinaWb) {
-        [self sinaShareWithContent:content image:imageData thumbImage:thumbImage title:title url:urlStr description:description mediaType:mediaType];
+        [[ShareKitSina sharedInstance] shareWithContent:content image:imageData thumbImage:thumbImage title:title url:urlStr description:description mediaType:mediaType];
+    } else if (type == ShareKitType_QQ) {
+        [[ShareKitQQ sharedInstance] shareWithContent:content image:imageData thumbImage:thumbImage title:title url:urlStr description:description mediaType:mediaType];
     }
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     if ([[url scheme] isEqualToString:ShareKitWXAppId]) {
-        return [WXApi handleOpenURL:url delegate:self];
+        return [[ShareKitWx sharedInstance] handleOpenUrl:url];
     } else if ([[url scheme] isEqualToString:[NSString stringWithFormat:@"wb%@", ShareKitSinaAppKey]]) {
-        return [WeiboSDK handleOpenURL:url delegate:self];
+        return [[ShareKitSina sharedInstance] handleOpenUrl:url];
+    } else if ([[url scheme] isEqualToString:[NSString stringWithFormat:@"tencent%@", ShareKitQQAppId]]) {
+        return [[ShareKitQQ sharedInstance] handleOpenUrl:url];
     }
     return NO;
 }

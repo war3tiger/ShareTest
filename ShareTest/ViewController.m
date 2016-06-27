@@ -48,7 +48,7 @@
 {
     int tag = (int)sender.tag;
     
-    ShareKitType shareType = ShareKitType_SinaWb;
+    ShareKitType shareType = ShareKitType_QQ;
     if (tag == 0) {
         [[ShareKit sharedInstance] shareWithContent:@"这是在测试文字分享" image:nil thumbImage:nil title:nil url:nil description:nil type:shareType mediaType:ShareKitMediaType_Text delegate:self];
     } else if (tag == 1) {

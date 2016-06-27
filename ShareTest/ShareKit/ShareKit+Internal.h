@@ -8,11 +8,6 @@
 
 #import "ShareKit.h"
 
-#define ShareKitWXAppId             @"wxd930ea5d5a258f4f"
-
-#define ShareKitSinaAppKey          @"2045436852"
-#define ShareKitSinaRedirectURI     @"https://api.weibo.com/oauth2/default.html"
-
 @interface ShareKit (Internal)
 
 - (void)notifyDelegateShareSuccess;
